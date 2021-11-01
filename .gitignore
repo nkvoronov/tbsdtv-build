@@ -1,0 +1,15 @@
+*.7z
+*.rar
+*.zip
+*.gz
+*.tgz
+*.bzip
+*.bz2
+*.xz
+*.lzma
+*.zst
+LE
+build
+source
+firmware
+modules
