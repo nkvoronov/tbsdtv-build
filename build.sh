@@ -7,7 +7,7 @@ DIR_BUILD="build"
 DIR_PATCHES="patches"
 DIR_MEDIA="media"
 DIR_MEDIA_BUILD="media_build"
-DIR_MODULES="modules"
+DIR_MODULES="tbsdtv-$(date +'%Y%m%d')"
 
 ROOT=$(pwd)
 BUILD="$ROOT/LE"
@@ -100,4 +100,6 @@ if [ -d $DIR_MODULES ]; then
   rm -rf $DIR_MODULES
 fi
 mkdir $DIR_MODULES
-find $DIR_BUILD/$DIR_MEDIA_BUILD/v4l -name \*.ko -exec cp {} $DIR_MODULES \;
+mkdir $DIR_MODULES/v4l
+find $DIR_BUILD/$DIR_MEDIA_BUILD/v4l -name \*.ko -exec cp {} $DIR_MODULES/v4l \;
+tar -zcvf $DIR_MODULES.tar.gz $DIR_MODULES/
