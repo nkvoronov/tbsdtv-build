@@ -8,6 +8,7 @@ DIR_PATCHES="patches"
 DIR_MEDIA="media"
 DIR_MEDIA_BUILD="media_build"
 CUR_KERNEL=$(uname -r)
+ROOT=$(pwd)
 DIR_DEST="/usr/lib/modules/"$CUR_KERNEL"/updates/tbs"
 
 #  get source
