@@ -9,7 +9,8 @@ DIR_MEDIA="media"
 DIR_MEDIA_BUILD="media_build"
 DIR_MODULES="modules"
 
-BUILD="/media/Devel/tbsdtv-build/LE"
+ROOT=$(pwd)
+BUILD="$ROOT/LE"
 TARGET_KERNEL_ARCH=x86
 TARGET_NAME="x86_64-libreelec-linux-gnu"
 TOOLCHAIN=$BUILD/toolchain

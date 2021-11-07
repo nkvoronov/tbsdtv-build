@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ROOT="/media/Devel/tbsdtv-build"
+ROOT=$(pwd)
 DIR_FIRMWARE="firmware"
 
 #  get firmware
