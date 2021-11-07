@@ -101,9 +101,3 @@ if [ -d $DIR_MODULES ]; then
 fi
 mkdir $DIR_MODULES
 find $DIR_BUILD/$DIR_MEDIA_BUILD/v4l -name \*.ko -exec cp {} $DIR_MODULES \;
-
-#CUR_KERNEL=$(uname -r)
-#DIR_DEST="/usr/lib/modules/"$CUR_KERNEL"/updates/tbs"
-
-#mkdir -p $DIR_DEST
-#sudo make install
