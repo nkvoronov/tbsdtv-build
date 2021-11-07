@@ -15,7 +15,7 @@ DIR_DEST="/usr/lib/modules/"$CUR_KERNEL"/updates/tbs"
 if [ ! -d $DIR_SOURCE ]; then
   mkdir $DIR_SOURCE
   cd $DIR_SOURCE
-  git clone $URL_GIT_BUILD
+  git clone $URL_GIT_BUILD -b extra
   git clone --depth=1 $URL_GIT_MEDIA -b latest ./media
   cd ..
 fi
