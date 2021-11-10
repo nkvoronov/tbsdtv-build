@@ -84,10 +84,12 @@ cd ../..
 cd $DIR_BUILD/$DIR_MEDIA_BUILD
 for f in *.patch; do patch -p1 < "$f"; done
 
-export KERNEL_VER="5.10.47"
+KERNEL_VER="5.10.76"
+
+export ${KERNEL_VER}
 export LDFLAGS=""
 
-KERNEL_PATH=${BUILD}/build/linux-5.10.47
+KERNEL_PATH=${BUILD}/build/linux-${KERNEL_VER}
 
 #  build
 make dir DIR=../media
