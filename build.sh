@@ -7,9 +7,10 @@ DIR_BUILD="build"
 DIR_PATCHES="patches"
 DIR_MEDIA="media"
 DIR_MEDIA_BUILD="media_build"
+CUR_KERNEL="5.10.76"
 DIR_MODULES="tbsdtv-$(date +'%Y%m%d')"
-
 ROOT=$(pwd)
+
 BUILD="$ROOT/LE"
 TARGET_KERNEL_ARCH=x86
 TARGET_NAME="x86_64-libreelec-linux-gnu"
@@ -79,22 +80,24 @@ cp -PR $DIR_PATCHES/$DIR_MEDIA_BUILD/* $DIR_BUILD/$DIR_MEDIA_BUILD
 
 cd $DIR_BUILD/$DIR_MEDIA
 for f in *.patch; do patch -p1 < "$f"; done
+
+#fix
+cp -P ../../$DIR_PATCHES/si2157.c drivers/media/tuners/
+
 cd ../..
 
 cd $DIR_BUILD/$DIR_MEDIA_BUILD
 for f in *.patch; do patch -p1 < "$f"; done
 
-KERNEL_VER="5.10.76"
-
-export ${KERNEL_VER}
+export ${CUR_KERNEL}
 export LDFLAGS=""
 
-KERNEL_PATH=${BUILD}/build/linux-${KERNEL_VER}
+KERNEL_PATH=${BUILD}/build/linux-${CUR_KERNEL}
 
 #  build
 make dir DIR=../media
-kernel_make VER=${KERNEL_VER} SRCDIR=${KERNEL_PATH} allyesconfig
-kernel_make VER=${KERNEL_VER} SRCDIR=${KERNEL_PATH}
+kernel_make VER=${CUR_KERNEL} SRCDIR=${KERNEL_PATH} allyesconfig
+kernel_make VER=${CUR_KERNEL} SRCDIR=${KERNEL_PATH}
 cd ../..
 
 # modules
