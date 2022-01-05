@@ -3,6 +3,7 @@
 URL_GIT_BUILD="https://github.com/tbsdtv/media_build.git"
 URL_GIT_MEDIA="https://github.com/tbsdtv/linux_media.git"
 DIR_SOURCE="source"
+#DIR_SOURCE="source_save"
 DIR_BUILD="build"
 DIR_PATCHES="patches"
 DIR_MEDIA="media"
@@ -37,12 +38,15 @@ mkdir $DIR_BUILD
 cp -PR $DIR_SOURCE/* $DIR_BUILD
 
 #  patches
-#  patches
 cp -PR $DIR_PATCHES/$DIR_MEDIA/* $DIR_BUILD/$DIR_MEDIA
 cp -PR $DIR_PATCHES/$DIR_MEDIA_BUILD/* $DIR_BUILD/$DIR_MEDIA_BUILD
 
 cd $DIR_BUILD/$DIR_MEDIA
 for f in *.patch; do patch -p1 < "$f"; done
+
+#fix
+cp -P ../../$DIR_PATCHES/si2157.c drivers/media/tuners/
+
 cd ../..
 
 cd $DIR_BUILD/$DIR_MEDIA_BUILD
