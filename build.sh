@@ -82,7 +82,7 @@ cd $DIR_BUILD/$DIR_MEDIA
 for f in *.patch; do patch -p1 < "$f"; done
 
 #fix
-cp -P ../../$DIR_PATCHES/si2157.c drivers/media/tuners/
+#cp -P ../../$DIR_PATCHES/si2157.c drivers/media/tuners/
 
 cd ../..
 
