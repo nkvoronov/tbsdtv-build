@@ -1,0 +1,3 @@
+URL_GIT_BUILD="https://github.com/tbsdtv/media_build.git"
+URL_GIT_MEDIA="https://github.com/tbsdtv/linux_media.git"
+URL_FIRMWARE="http://www.tbsdtv.com/download/document/linux/tbs-tuner-firmwares_v1.0.tar.bz2"

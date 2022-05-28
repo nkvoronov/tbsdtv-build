@@ -1,0 +1,18 @@
+#!/bin/bash
+
+. config/pathes
+
+if ls $ROOT/$DIR_MODULES/*.ko 1> /dev/null 2>&1; then
+  # install
+  printf "${green}*** INSTALL ***${endcolor}\n"
+
+  if [ -d $DIR_KERNEL_UPDATES ]; then
+    sudo rm -rf $DIR_KERNEL_UPDATES
+  fi
+
+  sudo mkdir -p $DIR_KERNEL_UPDATES
+  sudo cp -PR $ROOT/$DIR_MODULES/* $DIR_KERNEL_UPDATES
+  sudo depmod
+else
+  printf "${red}*** No dir modules or *.ko files ***${endcolor}\n"
+fi

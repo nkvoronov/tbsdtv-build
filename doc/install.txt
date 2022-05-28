@@ -26,3 +26,7 @@ UPGRADING SOURCES AND RE-INSTALLING
 ~/media_build $ sudo make install
 (now you can reboot or unload/reload modules manually:)
 ~/media_build $ sudo reboot
+
+UBUNTU
+
+apt-get install build-essential patchutils libproc-processtable-perl linux-headers-$(uname -r)

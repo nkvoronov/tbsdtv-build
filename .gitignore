@@ -8,9 +8,7 @@
 *.xz
 *.lzma
 *.zst
-LE
 build
 source
-source_save
 firmware
 modules
