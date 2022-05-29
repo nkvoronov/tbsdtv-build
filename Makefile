@@ -6,7 +6,7 @@ include config/pathes
 all:
 	./$(DIR_SCRIPTS)/get_source
 	./$(DIR_SCRIPTS)/update_source
-	./$(DIR_SCRIPTS)/build
+	./$(DIR_SCRIPTS)/builds
 	./$(DIR_SCRIPTS)/install
 firmware:
 	./$(DIR_SCRIPTS)/get_firmware
