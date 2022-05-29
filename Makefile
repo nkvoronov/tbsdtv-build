@@ -1,6 +1,6 @@
 include config/pathes
 
-.SILENT: all firmware source update build install clean cleanall
+.SILENT: all firmware source update build install uninstall clean cleanall
 .PHONY: firmware source build
 
 all:
@@ -18,6 +18,8 @@ build:
 	./$(DIR_SCRIPTS)/build
 install:
 	./$(DIR_SCRIPTS)/install
+uninstall:
+	./$(DIR_SCRIPTS)/uninstall
 clean:
 	rm -rf $(DIR_BUILD)
 	rm -rf $(DIR_FIRMWARE)

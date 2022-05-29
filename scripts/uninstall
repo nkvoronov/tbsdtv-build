@@ -1,0 +1,13 @@
+#!/bin/bash
+
+. config/pathes
+
+if ls $DIR_KERNEL_UPDATES/*.ko 1> /dev/null 2>&1; then
+  # uninstall
+  printf "${green}*** UNINSTALL ***${endcolor}\n"
+
+  sudo rm -rf $DIR_KERNEL_UPDATES
+  sudo depmod
+else
+  printf "${red}*** No install ***${endcolor}\n"
+fi
