@@ -2,12 +2,16 @@
 
 . config/pathes
 
-if ls $DIR_KERNEL_UPDATES/*.ko 1> /dev/null 2>&1; then
-  # uninstall
-  printf "${green}*** UNINSTALL ***${endcolor}\n"
+if [ "$TYPE_INSTALL" = "modules" ]; then
+  if ls $DIR_KERNEL_UPDATES/*.ko 1> /dev/null 2>&1; then
+    # uninstall
+    printf "${green}*** UNINSTALL ***${endcolor}\n"
 
-  sudo rm -rf $DIR_KERNEL_UPDATES
-  sudo depmod
+    sudo rm -rf $DIR_KERNEL_UPDATES
+    sudo depmod
+  else
+    printf "${red}*** No install ***${endcolor}\n"
+  fi
 else
-  printf "${red}*** No install ***${endcolor}\n"
+  printf "${red}*** Type install not modules ***${endcolor}\n"
 fi

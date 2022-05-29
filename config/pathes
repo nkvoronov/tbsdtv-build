@@ -12,7 +12,11 @@ DIR_MODULES="modules"
 DIR_KERNEL_UPDATES="/usr/lib/modules/$CUR_KERNEL/updates/tbs"
 DIR_FIRMWARE_INSTALL="/usr/lib/firmware"
 
-# Установленные цвета
+# values (make, modules)
+TYPE_INSTALL="make"
+# TYPE_INSTALL="modules"
+
+# colors
 black="\e[0;30m"
 boldblack="\e[1;30m"
 red="\e[0;31m"
