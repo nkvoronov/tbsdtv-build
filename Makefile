@@ -9,13 +9,13 @@ all:
 	./$(DIR_SCRIPTS)/build
 	./$(DIR_SCRIPTS)/install
 firmware:
-	./$(DIR_SCRIPTS)/firmware
+	./$(DIR_SCRIPTS)/get_firmware
 source:
 	./$(DIR_SCRIPTS)/get_source
 update:
 	./$(DIR_SCRIPTS)/update_source
 build:
-	./$(DIR_SCRIPTS)/build
+	./$(DIR_SCRIPTS)/builds
 install:
 	./$(DIR_SCRIPTS)/install
 uninstall:

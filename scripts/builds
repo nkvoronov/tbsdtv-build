@@ -1,0 +1,59 @@
+#!/bin/bash
+
+. config/pathes
+
+if [ -d $DIR_SOURCE ]; then
+  #  build dir
+  if [ -d $DIR_BUILD ]; then
+    rm -rf $DIR_BUILD
+  fi
+  mkdir $DIR_BUILD
+  cp -PR $DIR_SOURCE/* $DIR_BUILD
+
+  #  patches
+  printf "${green}*** PATHES ***${endcolor}\n"
+
+  cp -PR $DIR_PATCHES/$DIR_MEDIA/* $DIR_BUILD/$DIR_MEDIA
+  cp -PR $DIR_PATCHES/$DIR_MEDIA_BUILD/* $DIR_BUILD/$DIR_MEDIA_BUILD
+
+  cd $DIR_BUILD/$DIR_MEDIA
+  if ls *.patch 1> /dev/null 2>&1; then
+    for f in *.patch; do patch -p1 < "$f"; done
+  fi
+
+  #fix media
+  #cp -P ../../$DIR_PATCHES/si2157.c drivers/media/tuners/
+
+  cd ../..
+
+  cd $DIR_BUILD/$DIR_MEDIA_BUILD
+  if ls *.patch 1> /dev/null 2>&1; then
+    for f in *.patch; do patch -p1 < "$f"; done
+  fi
+
+  #  build
+  printf "${green}*** BUILD ***${endcolor}\n"
+
+  make dir DIR=../media
+  make allyesconfig
+  make -j4
+
+  if [ "$TYPE_INSTALL" = "make" ]; then
+    printf "${blue}*** Type install - MAKE ***${endcolor}\n"
+    sudo make install
+  else
+    printf "${blue}*** Type install - MODULES ***${endcolor}\n"
+    cd ../..
+
+    # modules
+    printf "${green}*** MODULES ***${endcolor}\n"
+
+    if [ -d $DIR_MODULES ]; then
+      rm -rf $DIR_MODULES
+    fi
+    mkdir $DIR_MODULES
+    find "$ROOT/$DIR_BUILD/$DIR_MEDIA_BUILD" -name '*.ko' -exec cp "{}" "$ROOT/$DIR_MODULES" \;
+  fi
+else
+  printf "${red}*** No source dir ***${endcolor}\n"
+fi

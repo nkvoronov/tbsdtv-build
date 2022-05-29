@@ -1,0 +1,30 @@
+#!/bin/bash
+
+. config/sources
+. config/pathes
+
+# get firmware
+printf "${green}*** GET FIRMWARE ***${endcolor}\n"
+
+if [ -d $DIR_FIRMWARE ]; then
+  rm -rf $DIR_FIRMWARE
+fi
+mkdir $DIR_FIRMWARE
+
+FIRMWARE_ARHIVE="`basename $URL_FIRMWARE`"
+
+wget --passive-ftp --no-check-certificate -c $URL_FIRMWARE
+tar jxvf $FIRMWARE_ARHIVE -C $ROOT/$DIR_FIRMWARE
+
+if [ -f $FIRMWARE_ARHIVE ]; then
+  rm $FIRMWARE_ARHIVE
+fi
+
+if [ -d $DIR_FIRMWARE_INSTALL ]; then
+  # install firmware
+  printf "${green}*** INSTALL FIRMWARE ***${endcolor}\n"
+
+  cp -PR $ROOT/$DIR_FIRMWARE/* $DIR_FIRMWARE_INSTALL
+else
+  printf "${red}*** No dir firmware ***${endcolor}\n"
+fi
