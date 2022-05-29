@@ -1,0 +1,37 @@
+#!/bin/bash
+
+. config/pathes
+
+if [ -d $DIR_BUILD/$DIR_MEDIA_BUILD/v4l ]; then
+  # modules
+  printf "${green}*** MODULES ***${endcolor}\n"
+
+  if [ ! -d $DIR_MODULES ]; then
+    mkdir $DIR_MODULES
+  fi
+
+  if [ -d $ROOT/$DIR_MODULES/$CUR_KERNEL/$NAME_DATASTAMP/v4l ]; then
+    rm -fr $ROOT/$DIR_MODULES/$CUR_KERNEL/$NAME_DATASTAMP/v4l
+  fi
+  mkdir -p $ROOT/$DIR_MODULES/${CUR_KERNEL}/$NAME_DATASTAMP/v4l
+
+  find $ROOT/$DIR_BUILD/$DIR_MEDIA_BUILD/v4l -name \*.ko -exec cp {} $ROOT/$DIR_MODULES/$CUR_KERNEL/$NAME_DATASTAMP/v4l \;
+
+  if [ ! -d $DIR_ARCHIVES ]; then
+    mkdir $DIR_ARCHIVES
+  fi
+
+  if [ -f $DIR_ARCHIVES/$NAME_DATASTAMP.tar.gz ]; then
+    rm $DIR_ARCHIVES/$NAME_DATASTAMP.tar.gz
+  fi
+
+  cd $ROOT/$DIR_MODULES/$CUR_KERNEL
+
+  tar -zcvf $NAME_DATASTAMP.tar.gz $NAME_DATASTAMP/
+
+  mv $NAME_DATASTAMP.tar.gz $ROOT/$DIR_ARCHIVES
+
+  cd $ROOT
+else
+  printf "${red}*** No dir build ***${endcolor}\n"
+fi

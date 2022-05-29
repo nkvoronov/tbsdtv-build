@@ -1,0 +1,25 @@
+setup_pkg_config_host() {
+  export PKG_CONFIG="$TOOLCHAIN/bin/pkg-config"
+  export PKG_CONFIG_PATH=""
+  export PKG_CONFIG_LIBDIR="$TOOLCHAIN/lib/pkgconfig:$TOOLCHAIN/share/pkgconfig"
+  export PKG_CONFIG_SYSROOT_BASE=""
+  export PKG_CONFIG_SYSROOT_DIR=""
+  unset PKG_CONFIG_ALLOW_SYSTEM_CFLAGS
+  unset PKG_CONFIG_ALLOW_SYSTEM_LIBS
+}
+
+kernel_make() {
+  (
+    setup_pkg_config_host
+
+    LDFLAGS="" make CROSS_COMPILE=$TARGET_KERNEL_PREFIX \
+      ARCH="$TARGET_KERNEL_ARCH" \
+      HOSTCC="$TOOLCHAIN/bin/host-gcc" \
+      HOSTCXX="$TOOLCHAIN/bin/host-g++" \
+      HOSTCFLAGS="$HOST_CFLAGS" \
+      HOSTLDFLAGS="$HOST_LDFLAGS" \
+      HOSTCXXFLAGS="$HOST_CXXFLAGS" \
+      DEPMOD="$TOOLCHAIN/bin/depmod" \
+      "$@"
+  )
+}

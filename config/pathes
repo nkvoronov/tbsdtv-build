@@ -1,0 +1,48 @@
+ROOT=$(pwd)
+CUR_KERNEL="5.10.76"
+
+DIR_SCRIPTS="scripts"
+DIR_FIRMWARE="firmware"
+DIR_SOURCE="source"
+DIR_BUILD="build"
+DIR_PATCHES="patches"
+DIR_MEDIA="media"
+DIR_MEDIA_BUILD="media_build"
+DIR_MODULES="modules"
+DIR_ARCHIVES="archives"
+NAME_DATASTAMP="tbsdtv-$(date +'%Y%m%d')"
+
+DIR_KERNEL_UPDATES="/usr/lib/modules/$CUR_KERNEL/updates/tbs"
+DIR_KERNEL_UPDATES_EXTRA="/usr/lib/modules/$CUR_KERNEL/updates/extra"
+DIR_FIRMWARE_INSTALL="/usr/lib/firmware"
+
+BUILD="$ROOT/LE"
+TARGET_KERNEL_ARCH=x86
+TARGET_NAME="x86_64-libreelec-linux-gnu"
+TOOLCHAIN=$BUILD/toolchain
+TARGET_PREFIX=$TOOLCHAIN/bin/$TARGET_NAME-
+TARGET_KERNEL_PREFIX=$TARGET_PREFIX
+MAKE="$TOOLCHAIN/bin/make"
+HOST_CPPFLAGS=""
+HOST_CFLAGS="-march=native -O2 -Wall -pipe -I$TOOLCHAIN/include"
+HOST_CXXFLAGS="$HOST_CFLAGS"
+HOST_LDFLAGS="-Wl,-rpath,$TOOLCHAIN/lib -L$TOOLCHAIN/lib"
+
+# colors
+black="\e[0;30m"
+boldblack="\e[1;30m"
+red="\e[0;31m"
+boldred="\e[1;31m"
+green="\e[0;32m"
+boldgreen="\e[1;32m"
+yellow="\e[0;33m"
+boldyellow="\e[1;33m"
+blue="\e[0;34m"
+boldblue="\e[1;34m"
+magenta="\e[0;35m"
+boldmagenta="\e[1;35m"
+cyan="\e[0;36m"
+boldcyan="\e[1;36m"
+white="\e[0;37m"
+boldwhite="\e[1;37m"
+endcolor="\e[0m"

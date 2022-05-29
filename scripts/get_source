@@ -1,0 +1,17 @@
+#!/bin/bash
+
+. config/sources
+. config/pathes
+
+if [ ! -d $DIR_SOURCE ]; then
+  #  get source
+  printf "${green}*** GET SOURCE ***${endcolor}\n"
+
+  mkdir $DIR_SOURCE
+  cd $DIR_SOURCE
+  git clone $URL_GIT_BUILD -b extra
+  git clone --depth=1 $URL_GIT_MEDIA -b latest ./media
+  cd ..
+else
+  printf "${blue}*** Source exists ***${endcolor}\n"
+fi

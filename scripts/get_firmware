@@ -1,0 +1,27 @@
+#!/bin/bash
+
+. config/sources
+. config/pathes
+
+# get firmware
+printf "${green}*** GET FIRMWARE ***${endcolor}\n"
+
+if [ -d $DIR_FIRMWARE ]; then
+  rm -rf $DIR_FIRMWARE
+fi
+mkdir $DIR_FIRMWARE
+
+FIRMWARE_ARHIVE="`basename $URL_FIRMWARE`"
+
+wget --passive-ftp --no-check-certificate -c $URL_FIRMWARE
+tar jxvf $FIRMWARE_ARHIVE -C $ROOT/$DIR_FIRMWARE
+
+if [ ! -d $DIR_ARCHIVES ]; then
+  mkdir $DIR_ARCHIVES
+fi
+
+if [ -f $DIR_ARCHIVES/$FIRMWARE_ARHIVE ]; then
+  rm $DIR_ARCHIVES/$FIRMWARE_ARHIVE
+fi
+
+mv $FIRMWARE_ARHIVE $DIR_ARCHIVES/tbsdtv-firmware-1.0.tar.bz2

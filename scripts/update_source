@@ -1,0 +1,18 @@
+#!/bin/bash
+
+. config/pathes
+
+if [ -d $DIR_SOURCE ]; then
+  #  update source
+  printf "${green}*** UPDATE SOURCE ***${endcolor}\n"
+
+  cd $DIR_SOURCE/media
+  git remote update
+  git pull
+  cd ../media_build
+  git remote update
+  git pull
+  cd ../..
+else
+  printf "${red}*** No source dir ***${endcolor}\n"
+fi
