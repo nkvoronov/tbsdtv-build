@@ -64,11 +64,16 @@ if [ -d $DIR_SOURCE ]; then
     # modules
     printf "${green}*** MODULES ***${endcolor}\n"
 
-    if [ -d $DIR_MODULES ]; then
-      rm -rf $DIR_MODULES
+    if [ ! -d $DIR_MODULES ]; then
+      mkdir $DIR_MODULES
     fi
-    mkdir $DIR_MODULES
-    find "$ROOT/$DIR_BUILD/$DIR_MEDIA_BUILD" -name '*.ko' -exec cp "{}" "$ROOT/$DIR_MODULES" \;
+
+    if [ -d $ROOT/$DIR_MODULES/$CUR_KERNEL/$NAME_DATASTAMP ]; then
+      rm -fr $ROOT/$DIR_MODULES/$CUR_KERNEL/$NAME_DATASTAMP
+    fi
+    mkdir -p $ROOT/$DIR_MODULES/${CUR_KERNEL}/$NAME_DATASTAMP
+
+    find "$ROOT/$DIR_BUILD/$DIR_MEDIA_BUILD" -name '*.ko' -exec cp "{}" "$ROOT/$DIR_MODULES/${CUR_KERNEL}/$NAME_DATASTAMP" \;
   fi
 else
   printf "${red}*** No source dir ***${endcolor}\n"
