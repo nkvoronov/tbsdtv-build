@@ -12,3 +12,4 @@ build
 source
 firmware
 modules
+modules_*

@@ -35,11 +35,27 @@ if [ -d $DIR_SOURCE ]; then
   printf "${green}*** BUILD ***${endcolor}\n"
 
   make dir DIR=../media
-  make allyesconfig
-  make -j4
+
+  if [ "$NCONFIG" = "all" ]; then
+    make allyesconfig
+  else
+    # Enable some staging drivers
+    make stagingconfig
+
+    # Disable RC/IR support
+    sed -i -r 's/(^CONFIG.*_RC.*=)./\1n/g' v4l/.config
+    sed -i -r 's/(^CONFIG.*_IR.*=)./\1n/g' v4l/.config
+  fi
+
+  make -j$(nproc)
 
   if [ "$TYPE_INSTALL" = "make" ]; then
     printf "${blue}*** Type install - MAKE ***${endcolor}\n"
+
+    if ls $DIR_KERNEL_UPDATES_EXTRA/* 1> /dev/null 2>&1; then
+      sudo rm -rf $DIR_KERNEL_UPDATES_EXTRA
+    fi
+
     sudo make install
   else
     printf "${blue}*** Type install - MODULES ***${endcolor}\n"

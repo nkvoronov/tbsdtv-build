@@ -8,10 +8,18 @@ if [ "$TYPE_INSTALL" = "modules" ]; then
     printf "${green}*** UNINSTALL ***${endcolor}\n"
 
     sudo rm -rf $DIR_KERNEL_UPDATES
-    sudo depmod
+    sudo depmod -a $CUR_KERNEL
   else
     printf "${red}*** No install ***${endcolor}\n"
   fi
 else
-  printf "${red}*** Type install not modules ***${endcolor}\n"
+  if ls $DIR_KERNEL_UPDATES_EXTRA/* 1> /dev/null 2>&1; then
+    # uninstall
+    printf "${green}*** UNINSTALL ***${endcolor}\n"
+
+    sudo rm -rf $DIR_KERNEL_UPDATES_EXTRA
+    sudo depmod -a $CUR_KERNEL
+  else
+    printf "${red}*** No install ***${endcolor}\n"
+  fi
 fi

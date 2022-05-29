@@ -13,7 +13,7 @@ if [ "$TYPE_INSTALL" = "modules" ]; then
 
     sudo mkdir -p $DIR_KERNEL_UPDATES
     sudo cp -PR $ROOT/$DIR_MODULES/* $DIR_KERNEL_UPDATES
-    sudo depmod
+    sudo depmod -a $CUR_KERNEL
   else
     printf "${red}*** No dir modules or *.ko files ***${endcolor}\n"
   fi
