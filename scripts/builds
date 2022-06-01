@@ -21,9 +21,6 @@ if [ -d $DIR_SOURCE ]; then
     for f in *.patch; do patch -p1 < "$f"; done
   fi
 
-  #fix media
-  #cp -P ../../$DIR_PATCHES/si2157.c drivers/media/tuners/
-
   cd ../..
 
   cd $DIR_BUILD/$DIR_MEDIA_BUILD
@@ -68,12 +65,12 @@ if [ -d $DIR_SOURCE ]; then
       mkdir $DIR_MODULES
     fi
 
-    if [ -d $ROOT/$DIR_MODULES/$CUR_KERNEL/$NAME_DATASTAMP ]; then
-      rm -fr $ROOT/$DIR_MODULES/$CUR_KERNEL/$NAME_DATASTAMP
+    if [ -d $ROOT/$DIR_MODULES/$CUR_KERNEL/$NAME_DATASTAMP$NCONFIG ]; then
+      rm -fr $ROOT/$DIR_MODULES/$CUR_KERNEL/$NAME_DATASTAMP$NCONFIG
     fi
-    mkdir -p $ROOT/$DIR_MODULES/${CUR_KERNEL}/$NAME_DATASTAMP
+    mkdir -p $ROOT/$DIR_MODULES/${CUR_KERNEL}/$NAME_DATASTAMP$NCONFIG
 
-    find "$ROOT/$DIR_BUILD/$DIR_MEDIA_BUILD" -name '*.ko' -exec cp "{}" "$ROOT/$DIR_MODULES/${CUR_KERNEL}/$NAME_DATASTAMP" \;
+    find "$ROOT/$DIR_BUILD/$DIR_MEDIA_BUILD" -name '*.ko' -exec cp "{}" "$ROOT/$DIR_MODULES/${CUR_KERNEL}/$NAME_DATASTAMP$NCONFIG" \;
   fi
 else
   printf "${red}*** No source dir ***${endcolor}\n"

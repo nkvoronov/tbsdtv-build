@@ -12,15 +12,15 @@ DIR_MODULES="modules"
 DIR_KERNEL_UPDATES="/usr/lib/modules/$CUR_KERNEL/updates/tbs"
 DIR_KERNEL_UPDATES_EXTRA="/usr/lib/modules/$CUR_KERNEL/updates/extra"
 DIR_FIRMWARE_INSTALL="/usr/lib/firmware"
-NAME_DATASTAMP="tbsdtv-$(date +'%Y%m%d')"
+NAME_DATASTAMP="tbsdtv-$(date +'%Y%m%d')-"
 
 # values (make, modules)
 # TYPE_INSTALL="make"
 TYPE_INSTALL="modules"
 
 # values (all, staging)
-# NCONFIG="all"
-NCONFIG="staging"
+NCONFIG="all"
+# NCONFIG="staging"
 
 # colors
 black="\e[0;30m"

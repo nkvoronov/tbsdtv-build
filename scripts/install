@@ -3,7 +3,7 @@
 . config/pathes
 
 if [ "$TYPE_INSTALL" = "modules" ]; then
-  if ls $ROOT/$DIR_MODULES/${CUR_KERNEL}/$NAME_DATASTAMP/*.ko 1> /dev/null 2>&1; then
+  if ls $ROOT/$DIR_MODULES/${CUR_KERNEL}/$NAME_DATASTAMP$NCONFIG/*.ko 1> /dev/null 2>&1; then
     # install
     printf "${green}*** INSTALL ***${endcolor}\n"
 
@@ -12,7 +12,7 @@ if [ "$TYPE_INSTALL" = "modules" ]; then
     fi
 
     sudo mkdir -p $DIR_KERNEL_UPDATES
-    sudo cp -PR $ROOT/$DIR_MODULES/${CUR_KERNEL}/$NAME_DATASTAMP/* $DIR_KERNEL_UPDATES
+    sudo cp -PR $ROOT/$DIR_MODULES/${CUR_KERNEL}/$NAME_DATASTAMP$NCONFIG/* $DIR_KERNEL_UPDATES
     sudo depmod -a $CUR_KERNEL
   else
     printf "${red}*** No dir modules or *.ko files ***${endcolor}\n"
